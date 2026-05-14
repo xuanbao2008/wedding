@@ -27,7 +27,22 @@ export const metadata: Metadata = {
     description: 'Chúng tôi trân trọng kính mời bạn đến dự lễ cưới của chúng tôi',
     url: 'https://baothao.run.place',
     siteName: 'Xuân Bảo & Đỗ Thảo Wedding',
-    images: ['https://i.postimg.cc/brMKxRrT/20260329-164112.jpg'],
+    images: [
+      {
+        url: 'https://lh3.googleusercontent.com/d/1C9TLedwVzp9XkyZIaPgixR9SlI6i1u-q=s4000?authuser=0',
+        width: 1200,
+        height: 630,
+        alt: 'Xuân Bảo & Đỗ Thảo Wedding Photo',
+      },
+    ],
+    locale: 'vi_VN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Xuân Bảo & Đỗ Thảo | Wedding Invitation',
+    description: 'Chúng tôi trân trọng kính mời bạn đến dự lễ cưới của chúng tôi',
+    images: ['https://lh3.googleusercontent.com/d/1C9TLedwVzp9XkyZIaPgixR9SlI6i1u-q=s4000?authuser=0'],
   },
   icons: {
     icon: [
