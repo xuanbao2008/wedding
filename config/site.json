@@ -1,0 +1,216 @@
+{
+  "site": {
+    "title": "Xuân Bảo & Đỗ Thảo",
+    "subtitle": "Wedding Invitation",
+    "domain": "https://baothao.run.place"
+  },
+  "couple": {
+    "groom": {
+      "name": "Đoàn Xuân Bảo",
+      "title": "Chú Rể"
+    },
+    "bride": {
+      "name": "Đỗ Thị Thảo",
+      "title": "Cô Dâu"
+    }
+  },
+  "navigation": {
+    "menu": [
+      { "label": "Chuyện tình", "href": "#couple" },
+      { "label": "Lịch tiệc", "href": "#events" },
+      { "label": "Tham dự", "href": "#rsvp" },
+      { "label": "Album ảnh", "href": "#gallery" },
+      { "label": "Quà cưới", "href": "#gift" }
+    ],
+    "logo": "Xuân Bảo & Đỗ Thảo"
+  },
+  "hero": {
+    "saveTheDate": "Save The Date",
+    "invitation": "Thiệp Mời Đám Cưới"
+  },
+  "events": {
+    "haiPhong": {
+      "title": "Lịch Tiệc Cưới",
+      "subtitle": "Hai ngày trọng đại tại Hải Phòng",
+      "events": [
+        {
+          "id": "hp-1",
+          "title": "Đám Cưới Tại Nhà Thờ",
+          "date": "05/06/2026",
+          "dayOfWeek": "Thứ Sáu",
+          "time": "19:00 (7 giờ tối)",
+          "location": "Nhà thờ An Quý",
+          "address": "Thôn Linh Đông 1, Xã Vĩnh Hải (Tiền Phong cũ), Vĩnh Bảo, Hải Phòng",
+          "mapUrl": "https://maps.app.goo.gl/MGbykLhKjAFL2wDG9",
+          "description": "Lễ cưới lúc 7h tối, tiệc nhẹ tại tư gia sau đó",
+          "isMain": true
+        },
+        {
+          "id": "hp-2",
+          "title": "Tiệc Đám Cưới Tại Tư Gia",
+          "date": "06/06/2026",
+          "dayOfWeek": "Thứ Bảy",
+          "time": "08:00 (8 giờ sáng)",
+          "location": "Thôn Linh Đông 1",
+          "address": "Thôn Linh Đông 1, Xã Vĩnh Hải (Tiền Phong cũ), Vĩnh Bảo, Hải Phòng",
+          "mapUrl": "https://maps.app.goo.gl/MGbykLhKjAFL2wDG9",
+          "description": "Tiệc đám cưới tại tư gia - 8 giờ sáng",
+          "isMain": true
+        }
+      ],
+      "rsvpEvents": [
+        {
+          "id": "hp-1",
+          "date": "Thứ Sáu, 05/06/2026 - 7 giờ tối",
+          "title": "Đám Cưới Tại Nhà Thờ"
+        },
+        {
+          "id": "hp-2",
+          "date": "Thứ Bảy, 06/06/2026 - 8 giờ sáng",
+          "title": "Tiệc Đám Cưới Tại Tư Gia"
+        }
+      ],
+      "countdown": {
+        "targetDate": "2026-06-05T19:00:00+07:00",
+        "label": "Thứ Sáu, 05 Tháng 6, 2026",
+        "title": "Đếm Ngược Đến Tiệc Cưới"
+      },
+      "dates": "05 - 06 . 06 . 2026"
+    },
+    "saiGon": {
+      "title": "Tiệc Báo Hỷ",
+      "subtitle": "Mừng hạnh phúc tại Sài Gòn",
+      "events": [
+        {
+          "id": "sg-1",
+          "title": "Tiệc Báo Hỷ Sài Gòn",
+          "date": "13/06/2026",
+          "dayOfWeek": "Thứ Bảy",
+          "time": "10:30 - 15:00",
+          "location": "Nhà hàng Vườn Quê",
+          "address": "38 đường D5, Phường 25, Quận Bình Thạnh, TP. Hồ Chí Minh",
+          "mapUrl": "https://maps.app.goo.gl/wNvvzVeE8LDg1qEs7",
+          "description": "Tiệc báo hỷ tại Sài Gòn - Mừng hạnh phúc lứa đôi",
+          "isMain": true
+        }
+      ],
+      "rsvpEvents": [
+        {
+          "id": "sg-1",
+          "date": "Thứ Bảy, 13/06/2026 - 10:30 đến 15:00",
+          "title": "Tiệc Báo Hỷ Sài Gòn"
+        }
+      ],
+      "countdown": {
+        "targetDate": "2026-06-13T10:30:00+07:00",
+        "label": "Thứ Bảy, 13 Tháng 6, 2026",
+        "title": "Đếm Ngược Đến Tiệc Báo Hỷ"
+      },
+      "dates": "13 . 06 . 2026"
+    }
+  },
+  "rsvp": {
+    "title": "Xác Nhận Tham Dự",
+    "attendance": {
+      "attending": "Tham dự",
+      "notAttending": "Không thể tham dự"
+    },
+    "fields": {
+      "fullName": {
+        "label": "Họ và tên",
+        "placeholder": "Nhập họ và tên của bạn"
+      },
+      "phone": {
+        "label": "Số điện thoại",
+        "placeholder": "Nhập số điện thoại"
+      },
+      "adultCount": {
+        "label": "Người lớn",
+        "options": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      },
+      "childCount": {
+        "label": "Trẻ em",
+        "options": [0, 1, 2, 3, 4, 5]
+      },
+      "eventSelection": {
+        "label": "Bạn sẽ tham dự thời gian nào?",
+        "singleEventInfo": "Thông tin sự kiện"
+      },
+      "message": {
+        "label": "Lời nhắn (không bắt buộc)",
+        "placeholder": "Gửi lời chúc đến cô dâu chú rể..."
+      },
+      "note": {
+        "label": "Ghi chú (không bắt buộc)",
+        "placeholder": "Ăn chay, dị ứng món ăn, ghi chú khác..."
+      }
+    },
+    "buttons": {
+      "confirm": "Xác nhận tham dự",
+      "decline": "Không thể tham dự",
+      "submitting": "Đang gửi..."
+    },
+    "success": {
+      "title": "Cảm ơn bạn!",
+      "message": "Chúng tôi đã nhận được phản hồi của bạn. Hẹn gặp bạn trong ngày trọng đại!",
+      "footer": "Xuân Bảo & Đỗ Thảo"
+    },
+    "validation": {
+      "nameRequired": "Vui lòng nhập họ và tên",
+      "eventRequired": "Vui lòng chọn ít nhất một thời gian bạn sẽ tham dự"
+    }
+  },
+  "giftBox": {
+    "title": "Quà Cưới",
+    "subtitle": "Tình cảm của bạn là món quà quý giá nhất",
+    "description": "Sự hiện diện của bạn trong ngày trọng đại của chúng tôi là món quà ý nghĩa nhất. Nếu bạn muốn gửi quà cưới, xin vui lòng gửi theo thông tin bên dưới:",
+    "bankInfo": {
+      "bankName": "Ngân hàng",
+      "accountNumber": "Số tài khoản",
+      "accountName": "Chủ tài khoản"
+    }
+  },
+  "gallery": {
+    "title": "Album Ảnh Cưới",
+    "subtitle": "Khoảnh khắc hạnh phúc của chúng tôi"
+  },
+  "footer": {
+    "madeWithLove": "Được tạo nên bằng cả trái tim ❤️ của 2 vợ chồng để mời mọi người",
+    "coupleNames": "Xuân Bảo & Đỗ Thảo",
+    "thankYou": "Vợ chồng mình chân thành cảm ơn!"
+  },
+  "home": {
+    "title": "Chọn địa điểm bạn sẽ tham dự",
+    "locations": [
+      {
+        "slug": "hai-phong",
+        "name": "Hải Phòng",
+        "description": "Lễ Cưới Chính",
+        "dates": "05-06/06/2026",
+        "address": "Thôn Linh Đông 1, Xã Vĩnh Hải, Vĩnh Bảo",
+        "cta": "Xem thiệp mời"
+      },
+      {
+        "slug": "sai-gon",
+        "name": "Sài Gòn",
+        "description": "Tiệc Báo Hỷ",
+        "dates": "13/06/2026",
+        "address": "Nhà hàng Vườn Quê, Quận Bình Thạnh",
+        "cta": "Xem thiệp mời"
+      }
+    ]
+  },
+  "countdown": {
+    "days": "Ngày",
+    "hours": "Giờ",
+    "minutes": "Phút",
+    "seconds": "Giây"
+  },
+  "music": {
+    "urls": [
+      "https://audio.jukehost.co.uk/019e2780-15d1-7110-a518-e7c3acf59c86",
+      "https://audio.jukehost.co.uk/019e27f4-ddcb-7109-9fa1-6c98ff82a5a3"
+    ],
+    "defaultVolume": 0.3
+  }
+}
