@@ -126,8 +126,9 @@ function doPost(e) {
       const lastRow = sheet.getLastRow();
       if (lastRow > 1) {
         const phones = sheet.getRange(2, 4, lastRow - 1, 1).getValues(); // Column D (SĐT)
-        const rowIndex = phones.findIndex(row => row[0] === data.phone);
-        
+        const phoneToFind = String(data.phone).trim();
+        const rowIndex = phones.findIndex(row => String(row[0]).trim() === phoneToFind);
+
         if (rowIndex !== -1) {
           // Found existing record, update it
           const range = sheet.getRange(rowIndex + 2, 1, 1, rowData.length);
@@ -177,7 +178,7 @@ function testSheetAccess() {
   const sheet = SpreadsheetApp
     .getActiveSpreadsheet()
     .getSheetByName(SHEET_NAME);
-  
+
   if (sheet) {
     Logger.log("Sheet found: " + sheet.getName());
     Logger.log("Last row: " + sheet.getLastRow());
