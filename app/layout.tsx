@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: 'Xuân Bảo & Đỗ Thảo Wedding',
     images: [
       {
-        url: '/og-preview.jpg',
+        url: 'https://wedding-baothao.pages.dev/og-preview.jpg',
         secureUrl: 'https://wedding-baothao.pages.dev/og-preview.jpg',
         width: 1200,
         height: 630,

@@ -130,23 +130,23 @@ function doPost(e) {
         const rowIndex = phones.findIndex(row => String(row[0]).trim() === phoneToFind);
 
         if (rowIndex !== -1) {
-          // Found existing record, update it
+          // Found existing record, update it — format phone cell as text first
+          try { sheet.getRange(rowIndex + 2, 4).setNumberFormat('@'); } catch(e) {}
           const range = sheet.getRange(rowIndex + 2, 1, 1, rowData.length);
           range.setValues([rowData]);
-          try { sheet.getRange(rowIndex + 2, 4).setNumberFormat('@'); } catch(e) {}
           rowId = String(rowIndex); // 0-based index
         } else {
-          // No existing record, append new row
-          sheet.appendRow(rowData);
-          const newRow = sheet.getLastRow();
+          // No existing record — format next row's phone cell before appending
+          const newRow = sheet.getLastRow() + 1;
           try { sheet.getRange(newRow, 4).setNumberFormat('@'); } catch(e) {}
+          sheet.appendRow(rowData);
           rowId = String(newRow - 1); // -1 for header row
         }
       } else {
-        // Sheet is empty (only headers), append new row
-        sheet.appendRow(rowData);
-        const newRow = sheet.getLastRow();
+        // Sheet is empty (only headers) — format next row's phone cell before appending
+        const newRow = sheet.getLastRow() + 1;
         try { sheet.getRange(newRow, 4).setNumberFormat('@'); } catch(e) {}
+        sheet.appendRow(rowData);
         rowId = String(newRow - 1);
       }
     } else {
