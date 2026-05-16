@@ -82,7 +82,7 @@ export default function RootLayout({
         <BackgroundMusic />
         <FloatingMenu />
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && process.env.VERCEL && <Analytics />}
       </body>
     </html>
   )
