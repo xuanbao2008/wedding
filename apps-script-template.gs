@@ -133,22 +133,28 @@ function doPost(e) {
           // Found existing record, update it
           const range = sheet.getRange(rowIndex + 2, 1, 1, rowData.length);
           range.setValues([rowData]);
+          try { sheet.getRange(rowIndex + 2, 4).setNumberFormat('@'); } catch(e) {}
           rowId = String(rowIndex); // 0-based index
         } else {
           // No existing record, append new row
           sheet.appendRow(rowData);
-          rowId = String(sheet.getLastRow() - 1); // -1 for header row
+          const newRow = sheet.getLastRow();
+          try { sheet.getRange(newRow, 4).setNumberFormat('@'); } catch(e) {}
+          rowId = String(newRow - 1); // -1 for header row
         }
       } else {
         // Sheet is empty (only headers), append new row
         sheet.appendRow(rowData);
-        rowId = String(sheet.getLastRow() - 1);
+        const newRow = sheet.getLastRow();
+        try { sheet.getRange(newRow, 4).setNumberFormat('@'); } catch(e) {}
+        rowId = String(newRow - 1);
       }
     } else {
       // No phone number, append new row
       sheet.appendRow(rowData);
       rowId = String(sheet.getLastRow() - 1);
     }
+
 
     const endTime = new Date().getTime();
     console.log(`RSVP processed in ${endTime - startTime}ms`);
@@ -185,4 +191,88 @@ function testSheetAccess() {
   } else {
     Logger.log("Sheet not found. Please create a sheet named 'RSVP'");
   }
+}
+
+// Function to remove duplicate entries based on phone number only
+// Keeps the most recent entry (largest timestamp), deletes all older duplicates
+function removeDuplicates() {
+  const spreadsheet = SPREADSHEET_ID
+    ? SpreadsheetApp.openById(SPREADSHEET_ID)
+    : SpreadsheetApp.getActiveSpreadsheet();
+
+  const sheet = spreadsheet.getSheetByName(SHEET_NAME);
+
+  if (!sheet) {
+    Logger.log("Sheet not found. Please create a sheet named 'RSVP'");
+    return;
+  }
+
+  const lastRow = sheet.getLastRow();
+
+  if (lastRow <= 1) {
+    Logger.log("No data to process (only headers)");
+    return;
+  }
+
+  // Get all data rows (skip header row 1)
+  const dataRange = sheet.getRange(2, 1, lastRow - 1, 10);
+  const data = dataRange.getValues();
+
+  // Key: phone (col D = index 3), unique identifier
+  // Value: { rowIndex (0-based in data array), timestampMs }
+  const latestByPhone = new Map();
+
+  // Parse timestamp flexibly: returns { dateMs, fullMs, hasTime }
+  function parseTs(ts) {
+    if (!ts) return { dateMs: 0, fullMs: 0, hasTime: false };
+    const d = ts instanceof Date ? ts : new Date(ts);
+    if (isNaN(d.getTime())) return { dateMs: 0, fullMs: 0, hasTime: false };
+    const dateMs = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    const hasTime = d.getHours() !== 0 || d.getMinutes() !== 0 || d.getSeconds() !== 0;
+    return { dateMs, fullMs: d.getTime(), hasTime };
+  }
+
+  // Returns true if candidate is newer/better than existing
+  function isNewer(candidate, existing) {
+    if (candidate.dateMs !== existing.dateMs) return candidate.dateMs > existing.dateMs;
+    // Same date: can't trust time component — use row position (higher index = appended later = newer)
+    return candidate.rowIndex > existing.rowIndex;
+  }
+
+  for (let i = 0; i < data.length; i++) {
+    const row = data[i];
+    const phone = String(row[3]).trim();
+
+    if (!phone) continue; // Skip rows without phone
+
+    const ts = { ...parseTs(row[0]), rowIndex: i };
+
+    if (!latestByPhone.has(phone)) {
+      latestByPhone.set(phone, { rowIndex: i, ts });
+    } else {
+      const existing = latestByPhone.get(phone);
+      if (isNewer(ts, existing.ts)) {
+        latestByPhone.set(phone, { rowIndex: i, ts });
+      }
+    }
+  }
+
+  // Collect rows to keep (1 per phone: the latest)
+  const keepRows = new Set(Array.from(latestByPhone.values()).map(v => v.rowIndex));
+
+  // Rows NOT in keepRows are duplicates to delete
+  const toDelete = [];
+  for (let i = 0; i < data.length; i++) {
+    const phone = String(data[i][3]).trim();
+    if (phone && !keepRows.has(i)) {
+      toDelete.push(i);
+    }
+  }
+
+  // Delete in reverse order to avoid row index shifting
+  toDelete.sort((a, b) => b - a);
+  toDelete.forEach(i => sheet.deleteRow(i + 2)); // +2: skip header + 1-based index
+
+  Logger.log(`Removed ${toDelete.length} duplicate entries`);
+  Logger.log(`Unique phone numbers: ${latestByPhone.size}`);
 }

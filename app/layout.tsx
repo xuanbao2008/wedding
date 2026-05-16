@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Cormorant_Garamond } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import { BackgroundMusic } from '@/components/wedding/background-music'
 import { FloatingMenu } from '@/components/wedding/floating-menu'
 import './globals.css'
@@ -82,7 +81,6 @@ export default function RootLayout({
         <BackgroundMusic />
         <FloatingMenu />
         {children}
-        {process.env.NODE_ENV === 'production' && process.env.VERCEL && <Analytics />}
       </body>
     </html>
   )
