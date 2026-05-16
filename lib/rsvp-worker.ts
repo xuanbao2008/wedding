@@ -129,16 +129,35 @@ const submitRSVPDirect = async (data: any): Promise<{ success: boolean; rowId?: 
   }
 }
 
-// Submit RSVP - always use direct fetch for reliable delivery (retry once on failure)
+// Fallback: direct POST to Apps Script from client (no-cors, fire-and-forget)
+const submitRSVPFallback = async (data: any): Promise<boolean> => {
+  const url = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL?.trim()
+  if (!url) return false
+  try {
+    await fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify(data),
+    })
+    return true // no-cors: cannot read response, assume sent
+  } catch {
+    return false
+  }
+}
+
+// Submit RSVP: try API route first, retry once, then fallback direct to Apps Script
 export const submitRSVPOptimistic = async (data: any): Promise<{ success: boolean; rowId?: string; optimistic: boolean }> => {
+  // Attempt 1: via /api/rsvp edge function
   let result = await submitRSVPDirect(data)
-  if (!result.success) {
-    // Retry once after 2s
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    result = await submitRSVPDirect(data)
-  }
-  return {
-    ...result,
-    optimistic: false,
-  }
+  if (result.success) return { ...result, optimistic: false }
+
+  // Attempt 2: retry after 2s
+  await new Promise(resolve => setTimeout(resolve, 2000))
+  result = await submitRSVPDirect(data)
+  if (result.success) return { ...result, optimistic: false }
+
+  // Attempt 3: direct to Apps Script (no-cors, best effort)
+  console.log('API route failed, trying direct Apps Script fallback')
+  const sent = await submitRSVPFallback(data)
+  return { success: sent, optimistic: sent } // optimistic=true = cannot verify
 }
