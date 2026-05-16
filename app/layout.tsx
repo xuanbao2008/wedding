@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     siteName: 'Xuân Bảo & Đỗ Thảo Wedding',
     images: [
       {
-        url: 'https://wedding-baothao.pages.dev/og-preview.jpg',
-        secureUrl: 'https://wedding-baothao.pages.dev/og-preview.jpg',
+        url: 'https://raw.githubusercontent.com/xuanbao2008/wedding/main/public/og-preview.jpg',
+        secureUrl: 'https://raw.githubusercontent.com/xuanbao2008/wedding/main/public/og-preview.jpg',
         width: 1200,
         height: 630,
         alt: 'Đám cưới Xuân Bảo & Đỗ Thảo - 06/06/2026',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Xuân Bảo & Đỗ Thảo 💍 | Thiệp Mời Đám Cưới',
     description: 'Trân trọng kính mời bạn đến dự Lễ Cưới Xuân Bảo & Đỗ Thảo - 05 & 06/06/2026 tại Hải Phòng và 13/06/2026 tại Sài Gòn.',
-    images: ['https://wedding-baothao.pages.dev/og-preview.jpg'],
+    images: ['https://raw.githubusercontent.com/xuanbao2008/wedding/main/public/og-preview.jpg'],
   },
   icons: {
     icon: [

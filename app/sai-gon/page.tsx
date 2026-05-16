@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: 'https://wedding-baothao.pages.dev/sai-gon',
     images: [
       {
-        url: 'https://wedding-baothao.pages.dev/og-preview.jpg',
+        url: 'https://raw.githubusercontent.com/xuanbao2008/wedding/main/public/og-preview.jpg',
         width: 1200,
         height: 630,
         alt: 'Tiệc Báo Hỷ Xuân Bảo & Đỗ Thảo - Sài Gòn 13/06/2026',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Tiệc Báo Hỷ Sài Gòn 🎉 | Xuân Bảo & Đỗ Thảo',
     description: 'Trân trọng kính mời tham dự Tiệc Báo Hỷ Xuân Bảo & Đỗ Thảo tại Nhà hàng Vườn Quê, TP. HCM - 13/06/2026',
-    images: ['https://wedding-baothao.pages.dev/og-preview.jpg'],
+    images: ['https://raw.githubusercontent.com/xuanbao2008/wedding/main/public/og-preview.jpg'],
   },
 }
 

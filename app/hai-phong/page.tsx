@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     url: 'https://wedding-baothao.pages.dev/hai-phong',
     images: [
       {
-        url: 'https://wedding-baothao.pages.dev/og-preview.jpg',
+        url: 'https://raw.githubusercontent.com/xuanbao2008/wedding/main/public/og-preview.jpg',
         width: 1200,
         height: 630,
         alt: 'Lễ Cưới Xuân Bảo & Đỗ Thảo - Hải Phòng 05/06/2026',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Lễ Cưới Hải Phòng 💒 | Xuân Bảo & Đỗ Thảo',
     description: 'Trân trọng kính mời tham dự Lễ Cưới Xuân Bảo & Đỗ Thảo tại Nhà thờ An Quý, TP. Hải Phòng - 05/06/2026',
-    images: ['https://wedding-baothao.pages.dev/og-preview.jpg'],
+    images: ['https://raw.githubusercontent.com/xuanbao2008/wedding/main/public/og-preview.jpg'],
   },
 }
 

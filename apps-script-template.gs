@@ -179,6 +179,14 @@ function doPost(e) {
   }
 }
 
+// Keep-warm function: set a time-based trigger to run every 5 minutes
+// This prevents cold starts on the web app endpoint
+// Setup: Extensions → Apps Script → Triggers → Add trigger
+//   Function: keepWarm | Event source: Time-driven | Every 5 minutes
+function keepWarm() {
+  console.log('Keep warm: ' + new Date().toISOString());
+}
+
 // Optional: Test function to check if sheet is accessible
 function testSheetAccess() {
   const sheet = SpreadsheetApp
