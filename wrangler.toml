@@ -1,9 +1,4 @@
-# Cloudflare Pages/Workers configuration
+# Cloudflare Pages configuration
 name = "wedding-bao-thao"
 compatibility_date = "2024-01-01"
-
-[env.production]
-vars = { ENVIRONMENT = "production" }
-
-[env.preview]
-vars = { ENVIRONMENT = "preview" }
+pages_build_output_dir = ".vercel/output/static"
