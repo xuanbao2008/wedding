@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Heart, MapPin, Clock, Calendar, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { openMapInExternalBrowser } from '@/lib/in-app-browser'
 
 export interface EventInfo {
   id: string
@@ -23,6 +24,10 @@ interface EventCardProps {
 }
 
 function EventCard({ event, index }: EventCardProps) {
+  const handleMapClick = (e: React.MouseEvent) => {
+    openMapInExternalBrowser(event.mapUrl, e)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -37,7 +42,7 @@ function EventCard({ event, index }: EventCardProps) {
           Sự kiện chính
         </div>
       )}
-      
+
       <h3 className="font-sans text-xl md:text-2xl font-bold text-foreground mb-4">
         {event.title}
       </h3>
@@ -68,15 +73,13 @@ function EventCard({ event, index }: EventCardProps) {
       <p className="text-muted-foreground mt-4 text-sm">{event.description}</p>
 
       <Button
-        asChild
+        onClick={handleMapClick}
         variant="outline"
         className="mt-4 w-full border-primary/30 text-primary hover:bg-primary/10"
       >
-        <a href={event.mapUrl} target="_blank" rel="noopener noreferrer">
-          <MapPin className="w-4 h-4 mr-2" />
-          Xem bản đồ
-          <ExternalLink className="w-3 h-3 ml-2" />
-        </a>
+        <MapPin className="w-4 h-4 mr-2" />
+        Xem bản đồ
+        <ExternalLink className="w-3 h-3 ml-2" />
       </Button>
     </motion.div>
   )

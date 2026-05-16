@@ -64,6 +64,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.7",
     "@tailwindcss/postcss": "^4.2.0",
     "@playwright/test": "^1.40.1",
     "@types/node": "^22",
