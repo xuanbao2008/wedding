@@ -129,53 +129,16 @@ const submitRSVPDirect = async (data: any): Promise<{ success: boolean; rowId?: 
   }
 }
 
-// Submit RSVP with optimistic update or direct fetch fallback
+// Submit RSVP - always use direct fetch for reliable delivery (retry once on failure)
 export const submitRSVPOptimistic = async (data: any): Promise<{ success: boolean; rowId?: string; optimistic: boolean }> => {
-  // Check if Service Worker and IndexedDB are supported
-  const hasServiceWorker = 'serviceWorker' in navigator
-  const hasIndexedDB = 'indexedDB' in window
-  const inApp = isInAppBrowser()
-
-  // If not supported or in-app browser, use direct fetch
-  if (!hasServiceWorker || !hasIndexedDB || inApp) {
-    console.log('Using direct fetch (in-app browser or no SW/IndexedDB support)')
-    const result = await submitRSVPDirect(data)
-    return {
-      ...result,
-      optimistic: false,
-    }
+  let result = await submitRSVPDirect(data)
+  if (!result.success) {
+    // Retry once after 2s
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    result = await submitRSVPDirect(data)
   }
-
-  // Use optimistic approach with Service Worker
-  try {
-    const submissionId = `${Date.now()}-${Math.random()}`
-    const submission: RSVPSubmission = {
-      id: submissionId,
-      data,
-      timestamp: Date.now(),
-    }
-
-    // Save to IndexedDB first (optimistic)
-    await saveSubmission(submission)
-
-    // Register service worker if not already registered
-    await registerServiceWorker()
-
-    // Trigger background sync
-    await triggerSync()
-
-    // Return optimistic success
-    return {
-      success: true,
-      optimistic: true,
-    }
-  } catch (error) {
-    console.error('Optimistic submission failed, falling back to direct fetch:', error)
-    // Fallback to direct fetch if optimistic approach fails
-    const result = await submitRSVPDirect(data)
-    return {
-      ...result,
-      optimistic: false,
-    }
+  return {
+    ...result,
+    optimistic: false,
   }
 }
