@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Heart, MapPin, Clock, Calendar, ExternalLink } from 'lucide-react'
+import { Heart, MapPin, Clock, Calendar, ExternalLink, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { openMapInExternalBrowser } from '@/lib/in-app-browser'
 
@@ -72,15 +72,24 @@ function EventCard({ event, index }: EventCardProps) {
 
       <p className="text-muted-foreground mt-4 text-sm">{event.description}</p>
 
-      <Button
-        onClick={handleMapClick}
-        variant="outline"
-        className="mt-4 w-full border-primary/30 text-primary hover:bg-primary/10"
-      >
-        <MapPin className="w-4 h-4 mr-2" />
-        Xem bản đồ
-        <ExternalLink className="w-3 h-3 ml-2" />
-      </Button>
+      <div className="mt-4 flex flex-col gap-2">
+        <Button
+          onClick={() => document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' })}
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+        >
+          <CheckCircle className="w-4 h-4 mr-2" />
+          Xác nhận tham dự
+        </Button>
+        <Button
+          onClick={handleMapClick}
+          variant="outline"
+          className="w-full border-primary/30 text-primary hover:bg-primary/10"
+        >
+          <MapPin className="w-4 h-4 mr-2" />
+          Xem bản đồ
+          <ExternalLink className="w-3 h-3 ml-2" />
+        </Button>
+      </div>
     </motion.div>
   )
 }
@@ -116,6 +125,14 @@ export function EventsSection({ events, title = 'Sự Kiện', subtitle }: Event
               {subtitle}
             </p>
           )}
+          <Button
+            onClick={() => document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' })}
+            className="mt-6 bg-primary hover:bg-primary/90 text-primary-foreground px-8"
+            size="lg"
+          >
+            <CheckCircle className="w-5 h-5 mr-2" />
+            Xác nhận tham dự ngay
+          </Button>
         </motion.div>
 
         {/* Events grid */}

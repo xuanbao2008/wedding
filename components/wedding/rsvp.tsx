@@ -86,16 +86,15 @@ export function RSVP({ events, location = 'hai_phong' }: RSVPProps) {
         setIsSubmitting(false)
         setIsSubmitted(true)
         setSubmittedData(formData)
-        // Service worker will sync in background and handle rowId
       } else {
-        console.error('Submission failed')
         setIsSubmitting(false)
-        alert('Có lỗi xảy ra, vui lòng thử lại')
+        const errDetail = (result as any).error ? `\n(${(result as any).error})` : ''
+        alert(`Có lỗi xảy ra, vui lòng thử lại${errDetail}`)
       }
     } catch (error) {
       console.error('Submission error:', error)
       setIsSubmitting(false)
-      alert('Có lỗi xảy ra, vui lòng thử lại')
+      alert(`Có lỗi xảy ra, vui lòng thử lại\n(${String(error)})`)
     }
   }
 

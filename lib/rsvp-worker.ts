@@ -89,25 +89,29 @@ const isInAppBrowser = (): boolean => {
 }
 
 // Direct fetch submission (fallback for browsers without Service Worker support)
-const submitRSVPDirect = async (data: any): Promise<{ success: boolean; rowId?: string }> => {
+const submitRSVPDirect = async (data: any): Promise<{ success: boolean; rowId?: string; error?: string }> => {
   try {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), 30000)
 
     const response = await fetch('/api/rsvp', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
       signal: controller.signal,
     })
     clearTimeout(timeout)
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => '')
-      console.error('Direct submission failed with status:', response.status, errorText)
-      return { success: false }
+      let errorMsg = `HTTP ${response.status}`
+      try {
+        const errJson = await response.json()
+        errorMsg = errJson.error || errorMsg
+      } catch {
+        errorMsg = (await response.text().catch(() => '')) || errorMsg
+      }
+      console.error('RSVP API error:', errorMsg)
+      return { success: false, error: errorMsg }
     }
 
     let result
@@ -117,15 +121,11 @@ const submitRSVPDirect = async (data: any): Promise<{ success: boolean; rowId?: 
       return { success: true }
     }
 
-    return {
-      success: true,
-      rowId: result.rowId,
-    }
-  } catch (error) {
-    console.error('Direct submission failed:', error)
-    return {
-      success: false,
-    }
+    return { success: true, rowId: result.rowId }
+  } catch (error: any) {
+    const msg = error?.name === 'AbortError' ? 'Timeout - mạng quá chậm' : String(error)
+    console.error('RSVP fetch failed:', msg)
+    return { success: false, error: msg }
   }
 }
 

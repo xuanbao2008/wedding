@@ -1,5 +1,5 @@
 // Service Worker for offline RSVP submission
-const CACHE_NAME = 'wedding-rsvp-v1'
+const CACHE_NAME = 'wedding-rsvp-v2'
 const RSVP_DB_NAME = 'WeddingRSVP'
 const RSVP_STORE_NAME = 'pendingSubmissions'
 

@@ -20,11 +20,11 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: 'Xuân Bảo & Đỗ Thảo | Wedding Invitation',
-  description: 'Thiệp mời đám cưới của Đoàn Xuân Bảo và Đỗ Thị Thảo - 06/06/2026',
+  description: 'Trân trọng kính mời bạn đến dự Lễ Cưới của Đoàn Xuân Bảo & Đỗ Thị Thảo - 05-06/06/2026 tại Hải Phòng và 13/06/2026 tại Sài Gòn.',
   metadataBase: new URL('https://wedding-baothao.pages.dev'),
   openGraph: {
     title: 'Xuân Bảo & Đỗ Thảo 💍 | Thiệp Mời Đám Cưới',
-    description: 'Chúng tôi trân trọng kính mời bạn đến dự lễ cưới của chúng tôi vào ngày 05-06/06/2026 tại Hải Phòng',
+    description: 'Trân trọng kính mời bạn đến dự Lễ Cưới Xuân Bảo & Đỗ Thảo - 05 & 06/06/2026 tại Hải Phòng và 13/06/2026 tại Sài Gòn.',
     url: 'https://wedding-baothao.pages.dev',
     siteName: 'Xuân Bảo & Đỗ Thảo Wedding',
     images: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Xuân Bảo & Đỗ Thảo 💍 | Thiệp Mời Đám Cưới',
-    description: 'Chúng tôi trân trọng kính mời bạn đến dự lễ cưới của chúng tôi vào ngày 05-06/06/2026 tại Hải Phòng',
+    description: 'Trân trọng kính mời bạn đến dự Lễ Cưới Xuân Bảo & Đỗ Thảo - 05 & 06/06/2026 tại Hải Phòng và 13/06/2026 tại Sài Gòn.',
     images: ['https://wedding-baothao.pages.dev/og-preview.jpg'],
   },
   icons: {
