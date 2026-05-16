@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import { Gift, QrCode, X, MapPin } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 export function FloatingMenu() {
   const [isQRModalOpen, setIsQRModalOpen] = useState(false)
   const [isEventModalOpen, setIsEventModalOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
 
   const scrollToRSVP = () => {
     // If on homepage, show event selection modal
@@ -26,8 +27,7 @@ export function FloatingMenu() {
 
   const navigateToEvent = (event: 'hai-phong' | 'sai-gon') => {
     setIsEventModalOpen(false)
-    // Navigate to the page and then scroll to RSVP
-    window.location.href = `/${event === 'hai-phong' ? 'hai-phong' : 'sai-gon'}#rsvp`
+    router.push(`/${event}#rsvp`)
   }
 
   return (
