@@ -40,7 +40,7 @@ export function Couple() {
             <div className="relative inline-block mb-6">
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-primary/30 shadow-xl mx-auto">
                 <Image
-                  src="https://lh3.googleusercontent.com/d/1H9ZdFSJWxeFRipPLp1POK3NVicDi7qhs=s4000?authuser=0"
+                  src="https://lh3.googleusercontent.com/d/1CTGwCVszchFx3cRN1n_AtCOE0l1JZkw-=s4000?authuser=0"
                   alt={`Chú rể - ${config.couple.groom.name}`}
                   fill
                   className="object-cover"
@@ -81,7 +81,7 @@ export function Couple() {
             <div className="relative inline-block mb-6">
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-primary/30 shadow-xl mx-auto">
                 <Image
-                  src="https://lh3.googleusercontent.com/d/14xb_eutG9K_37tgJSXGbN4QHh8-sbsJb=s4000?authuser=0"
+                  src="https://lh3.googleusercontent.com/d/17QKwD6LeXtK4DmnyV_XNY9wT9MUrYC0J=s4000?authuser=0"
                   alt={`Cô dâu - ${config.couple.bride.name}`}
                   fill
                   className="object-cover"
