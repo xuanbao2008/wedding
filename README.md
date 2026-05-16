@@ -50,7 +50,8 @@ Mở browser tại http://localhost:3000
 
 ### Production Domain
 
-Website sẽ được deploy tại: https://wedding-baothao.vercel.app/
+- **Vercel**: https://wedding-baothao.vercel.app
+- **Cloudflare Pages**: https://wedding-baothao.pages.dev
 
 ## 📝 Cấu hình Google Apps Script cho RSVP
 
