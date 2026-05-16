@@ -14,6 +14,8 @@ interface RSVPProps {
     id: string
     date: string
     title: string
+    location?: string
+    address?: string
   }>
   location?: 'hai_phong' | 'sai_gon'
 }
@@ -343,6 +345,12 @@ export function RSVP({ events, location = 'hai_phong' }: RSVPProps) {
                     <div className="p-4 rounded-xl border border-primary/30 bg-primary/5">
                       <p className="font-medium text-foreground">{events[0].title}</p>
                       <p className="text-sm text-muted-foreground">{events[0].date}</p>
+                      {events[0].location && (
+                        <p className="text-sm text-primary/80 mt-1">📍 {events[0].location}</p>
+                      )}
+                      {events[0].address && (
+                        <p className="text-xs text-muted-foreground">{events[0].address}</p>
+                      )}
                     </div>
                     <input
                       type="hidden"
@@ -375,6 +383,12 @@ export function RSVP({ events, location = 'hai_phong' }: RSVPProps) {
                           <label htmlFor={event.id} className="flex-1 cursor-pointer">
                             <p className="font-medium text-foreground">{event.title}</p>
                             <p className="text-sm text-muted-foreground">{event.date}</p>
+                            {event.location && (
+                              <p className="text-xs text-primary/80 mt-0.5">📍 {event.location}</p>
+                            )}
+                            {event.address && (
+                              <p className="text-xs text-muted-foreground">{event.address}</p>
+                            )}
                           </label>
                         </div>
                       ))}

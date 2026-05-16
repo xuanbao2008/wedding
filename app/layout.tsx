@@ -21,19 +21,20 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: 'Xuân Bảo & Đỗ Thảo | Wedding Invitation',
   description: 'Thiệp mời đám cưới của Đoàn Xuân Bảo và Đỗ Thị Thảo - 06/06/2026',
-  generator: 'v0.app',
   metadataBase: new URL('https://baothao.run.place'),
   openGraph: {
-    title: 'Xuân Bảo & Đỗ Thảo | Wedding Invitation',
-    description: 'Chúng tôi trân trọng kính mời bạn đến dự lễ cưới của chúng tôi',
+    title: 'Xuân Bảo & Đỗ Thảo 💍 | Thiệp Mời Đám Cưới',
+    description: 'Chúng tôi trân trọng kính mời bạn đến dự lễ cưới của chúng tôi vào ngày 05-06/06/2026 tại Hải Phòng',
     url: 'https://baothao.run.place',
     siteName: 'Xuân Bảo & Đỗ Thảo Wedding',
     images: [
       {
-        url: 'https://lh3.googleusercontent.com/d/1C9TLedwVzp9XkyZIaPgixR9SlI6i1u-q=s4000?authuser=0',
+        url: '/og-preview.jpg',
+        secureUrl: 'https://baothao.run.place/og-preview.jpg',
         width: 1200,
         height: 630,
-        alt: 'Xuân Bảo & Đỗ Thảo Wedding Photo',
+        alt: 'Đám cưới Xuân Bảo & Đỗ Thảo - 06/06/2026',
+        type: 'image/jpeg',
       },
     ],
     locale: 'vi_VN',
@@ -41,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Xuân Bảo & Đỗ Thảo | Wedding Invitation',
-    description: 'Chúng tôi trân trọng kính mời bạn đến dự lễ cưới của chúng tôi',
-    images: ['https://lh3.googleusercontent.com/d/1C9TLedwVzp9XkyZIaPgixR9SlI6i1u-q=s4000?authuser=0'],
+    title: 'Xuân Bảo & Đỗ Thảo 💍 | Thiệp Mời Đám Cưới',
+    description: 'Chúng tôi trân trọng kính mời bạn đến dự lễ cưới của chúng tôi vào ngày 05-06/06/2026 tại Hải Phòng',
+    images: ['https://baothao.run.place/og-preview.jpg'],
   },
   icons: {
     icon: [

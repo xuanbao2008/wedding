@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Thumbs, Autoplay, Pagination } from 'swiper/modules'
-import { motion } from 'framer-motion'
-import { Camera, Play, Pause } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Camera, Play, Pause, ZoomIn, ZoomOut, X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
@@ -61,7 +61,43 @@ export function Gallery({
   subtitle = config.gallery.subtitle
 }: GalleryProps) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null)
+  const [mainSwiper, setMainSwiper] = useState<any>(null)
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false)
+  const [viewerOpen, setViewerOpen] = useState(false)
+  const [viewerIndex, setViewerIndex] = useState(0)
+  const [zoomLevel, setZoomLevel] = useState(1)
+
+  const toggleAutoplay = () => {
+    const newPaused = !isAutoplayPaused
+    setIsAutoplayPaused(newPaused)
+    if (mainSwiper?.autoplay) {
+      newPaused ? mainSwiper.autoplay.stop() : mainSwiper.autoplay.start()
+    }
+    if (thumbsSwiper?.autoplay) {
+      newPaused ? thumbsSwiper.autoplay.stop() : thumbsSwiper.autoplay.start()
+    }
+  }
+
+  const openViewer = (index: number) => {
+    setViewerIndex(index)
+    setZoomLevel(1)
+    setViewerOpen(true)
+  }
+
+  const closeViewer = () => {
+    setViewerOpen(false)
+    setZoomLevel(1)
+  }
+
+  const prevImage = () => {
+    setViewerIndex(i => (i - 1 + images.length) % images.length)
+    setZoomLevel(1)
+  }
+
+  const nextImage = () => {
+    setViewerIndex(i => (i + 1) % images.length)
+    setZoomLevel(1)
+  }
 
   return (
     <section id="gallery" className="py-20 px-4 bg-muted/30">
@@ -91,29 +127,30 @@ export function Gallery({
         <div className="swiper-container">
           {/* Main Swiper */}
           <Swiper
+            onSwiper={setMainSwiper}
             spaceBetween={10}
             thumbs={{ swiper: thumbsSwiper }}
             modules={[FreeMode, Navigation, Thumbs, Autoplay, Pagination]}
             className="mySwiper2 mb-4 rounded-xl"
             navigation
-            pagination={{
-              clickable: true,
-              dynamicBullets: true,
-            }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
+            pagination={{ clickable: true, dynamicBullets: true }}
+            autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
           >
             {images.map((image, index) => (
               <SwiperSlide key={index}>
-                <div className="relative aspect-video md:aspect-[16/9] bg-muted">
+                <div className="relative aspect-video md:aspect-[16/9] bg-muted group">
                   <img
                     src={image.src}
                     alt={image.alt}
                     className="w-full h-full object-contain"
                   />
+                  <button
+                    onClick={(e) => { e.stopPropagation(); openViewer(index) }}
+                    className="absolute top-3 right-3 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+                    title="Xem ảnh phóng to"
+                  >
+                    <Maximize2 className="w-4 h-4" />
+                  </button>
                 </div>
               </SwiperSlide>
             ))}
@@ -122,7 +159,7 @@ export function Gallery({
           {/* Controls */}
           <div className="flex items-center justify-between mb-4">
             <button
-              onClick={() => setIsAutoplayPaused(!isAutoplayPaused)}
+              onClick={toggleAutoplay}
               className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 rounded-full transition-colors"
             >
               {isAutoplayPaused ? (
@@ -137,12 +174,19 @@ export function Gallery({
                 </>
               )}
             </button>
-            <div className="text-sm text-muted-foreground">
-              {images.length} ảnh
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-muted-foreground">{images.length} ảnh</span>
+              <button
+                onClick={() => openViewer(mainSwiper?.activeIndex || 0)}
+                className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 rounded-full transition-colors"
+              >
+                <ZoomIn className="w-4 h-4" />
+                <span className="text-sm">Xem ảnh</span>
+              </button>
             </div>
           </div>
 
-          {/* Thumbs Swiper with continuous scrolling */}
+          {/* Thumbs Swiper */}
           <Swiper
             onSwiper={setThumbsSwiper}
             spaceBetween={10}
@@ -151,15 +195,7 @@ export function Gallery({
             watchSlidesProgress={true}
             modules={[FreeMode, Navigation, Thumbs, Autoplay]}
             className="mySwiper"
-            autoplay={
-              isAutoplayPaused 
-                ? false 
-                : {
-                    delay: 2000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                  }
-            }
+            autoplay={{ delay: 2000, disableOnInteraction: false, pauseOnMouseEnter: true }}
           >
             {images.map((image, index) => (
               <SwiperSlide key={index}>
@@ -174,8 +210,83 @@ export function Gallery({
             ))}
           </Swiper>
         </div>
-
       </div>
+
+      {/* Photo Viewer Modal */}
+      <AnimatePresence>
+        {viewerOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
+            onClick={closeViewer}
+          >
+            {/* Close */}
+            <button
+              onClick={closeViewer}
+              className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Zoom controls */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 bg-black/50 rounded-full px-3 py-1.5">
+              <button
+                onClick={(e) => { e.stopPropagation(); setZoomLevel(z => Math.max(z - 0.5, 0.5)) }}
+                className="text-white hover:text-primary transition-colors"
+              >
+                <ZoomOut className="w-4 h-4" />
+              </button>
+              <span className="text-white text-xs w-10 text-center">{Math.round(zoomLevel * 100)}%</span>
+              <button
+                onClick={(e) => { e.stopPropagation(); setZoomLevel(z => Math.min(z + 0.5, 4)) }}
+                className="text-white hover:text-primary transition-colors"
+              >
+                <ZoomIn className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Image counter */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 text-white/70 text-sm">
+              {viewerIndex + 1} / {images.length}
+            </div>
+
+            {/* Prev */}
+            <button
+              onClick={(e) => { e.stopPropagation(); prevImage() }}
+              className="absolute left-2 md:left-4 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            {/* Next */}
+            <button
+              onClick={(e) => { e.stopPropagation(); nextImage() }}
+              className="absolute right-2 md:right-4 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Image */}
+            <motion.div
+              key={viewerIndex}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              className="max-w-5xl w-full mx-8 md:mx-16 flex items-center justify-center overflow-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={images[viewerIndex].src}
+                alt={images[viewerIndex].alt}
+                style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'center', transition: 'transform 0.2s ease' }}
+                className="max-h-[80vh] max-w-full object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

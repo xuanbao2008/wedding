@@ -62,12 +62,16 @@
         {
           "id": "hp-1",
           "date": "Thứ Sáu, 05/06/2026 - 7 giờ tối",
-          "title": "Đám Cưới Tại Nhà Thờ"
+          "title": "Đám Cưới Tại Nhà Thờ",
+          "location": "Nhà thờ An Quý",
+          "address": "Cộng Hiền, Vĩnh Bảo, TP. Hải Phòng"
         },
         {
           "id": "hp-2",
           "date": "Thứ Bảy, 06/06/2026 - 8 giờ sáng",
-          "title": "Tiệc Đám Cưới Tại Tư Gia"
+          "title": "Tiệc Đám Cưới Tại Tư Gia",
+          "location": "Thôn Linh Đông 1",
+          "address": "Thôn Linh Đông 1, Xã Vĩnh Hải, Vĩnh Bảo, Hải Phòng"
         }
       ],
       "countdown": {
@@ -98,7 +102,9 @@
         {
           "id": "sg-1",
           "date": "Thứ Bảy, 13/06/2026 - 10:30 đến 15:00",
-          "title": "Tiệc Báo Hỷ Sài Gòn"
+          "title": "Tiệc Báo Hỷ Sài Gòn",
+          "location": "Nhà hàng Vườn Quê",
+          "address": "38 đường D5, Phường 25, Quận Bình Thạnh, TP. HCM"
         }
       ],
       "countdown": {

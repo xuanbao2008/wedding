@@ -10,6 +10,7 @@ export function BackgroundMusic() {
   const [isMuted, setIsMuted] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const userPausedRef = useRef(false)
 
   const getRandomTrackIndex = () => {
     const urls = config.music.urls
@@ -54,14 +55,15 @@ export function BackgroundMusic() {
 
       attemptAutoplay()
 
-      // Add scroll/touch trigger (not click to avoid interfering with pause button)
+      // Add interaction triggers - check userPausedRef to skip if user explicitly paused
       const handleInteraction = async () => {
-        if (audio && audio.paused) {
+        if (audio && audio.paused && !userPausedRef.current) {
           try {
             await audio.play()
             setIsPlaying(true)
             window.removeEventListener('scroll', handleInteraction)
             window.removeEventListener('touchstart', handleInteraction)
+            window.removeEventListener('click', handleInteraction)
           } catch (error) {
             console.log('Play failed on interaction:', error)
           }
@@ -70,6 +72,7 @@ export function BackgroundMusic() {
 
       window.addEventListener('scroll', handleInteraction, { once: true })
       window.addEventListener('touchstart', handleInteraction, { once: true })
+      window.addEventListener('click', handleInteraction, { once: true })
 
       // Handle track end
       const handleEnded = () => {
@@ -81,6 +84,7 @@ export function BackgroundMusic() {
       return () => {
         window.removeEventListener('scroll', handleInteraction)
         window.removeEventListener('touchstart', handleInteraction)
+        window.removeEventListener('click', handleInteraction)
         audio.removeEventListener('ended', handleEnded)
       }
     }
@@ -98,8 +102,10 @@ export function BackgroundMusic() {
     if (audio) {
       if (isPlaying) {
         audio.pause()
+        userPausedRef.current = true
       } else {
         audio.play()
+        userPausedRef.current = false
       }
       setIsPlaying(!isPlaying)
     }
