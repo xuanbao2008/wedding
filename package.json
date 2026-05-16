@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
-    "pages:build": "npx @cloudflare/next-on-pages"
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -65,7 +64,6 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.7",
     "@tailwindcss/postcss": "^4.2.0",
     "@playwright/test": "^1.40.1",
     "@types/node": "^22",
@@ -74,7 +72,6 @@
     "postcss": "^8.5",
     "tailwindcss": "^4.2.0",
     "tw-animate-css": "1.3.3",
-    "typescript": "5.7.3",
-    "vercel": "^37.6.9"
+    "typescript": "5.7.3"
   }
 }
