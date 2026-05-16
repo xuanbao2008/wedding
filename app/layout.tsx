@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Cormorant_Garamond } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { BackgroundMusic } from '@/components/wedding/background-music'
+import { FloatingMenu } from '@/components/wedding/floating-menu'
 import './globals.css'
 
 const playfair = Playfair_Display({ 
@@ -78,6 +79,7 @@ export default function RootLayout({
     <html lang="vi" className={`${playfair.variable} ${cormorant.variable} bg-background`}>
       <body className="font-serif antialiased">
         <BackgroundMusic />
+        <FloatingMenu />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
