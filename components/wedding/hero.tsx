@@ -12,8 +12,8 @@ interface HeroProps {
 
 export function Hero({ location, dates }: HeroProps) {
   const couplePhotos: Record<string, string> = {
-    'Hải Phòng': 'https://lh3.googleusercontent.com/d/1lEMfVwYL6QVPT7Hl4dQIq-6WQLODWBno=s4000?authuser=0',
-    'Sài Gòn': 'https://lh3.googleusercontent.com/d/1lEMfVwYL6QVPT7Hl4dQIq-6WQLODWBno=s4000?authuser=0',
+    'Hải Phòng': 'https://lh3.googleusercontent.com/d/1KxDwEG1D0TpCMQMzfaN_PW6yc8sIu4v3=s4000',
+    'Sài Gòn': 'https://lh3.googleusercontent.com/d/1KxDwEG1D0TpCMQMzfaN_PW6yc8sIu4v3=s4000',
   }
 
   return (
