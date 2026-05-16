@@ -54,16 +54,14 @@ export function BackgroundMusic() {
 
       attemptAutoplay()
 
-      // Add scroll/touch trigger
+      // Add scroll/touch trigger (not click to avoid interfering with pause button)
       const handleInteraction = async () => {
-        if (!isPlaying && audio) {
+        if (audio && audio.paused) {
           try {
             await audio.play()
             setIsPlaying(true)
-            // Remove listeners after successful play
             window.removeEventListener('scroll', handleInteraction)
             window.removeEventListener('touchstart', handleInteraction)
-            window.removeEventListener('click', handleInteraction)
           } catch (error) {
             console.log('Play failed on interaction:', error)
           }
@@ -72,7 +70,6 @@ export function BackgroundMusic() {
 
       window.addEventListener('scroll', handleInteraction, { once: true })
       window.addEventListener('touchstart', handleInteraction, { once: true })
-      window.addEventListener('click', handleInteraction, { once: true })
 
       // Handle track end
       const handleEnded = () => {
@@ -84,7 +81,6 @@ export function BackgroundMusic() {
       return () => {
         window.removeEventListener('scroll', handleInteraction)
         window.removeEventListener('touchstart', handleInteraction)
-        window.removeEventListener('click', handleInteraction)
         audio.removeEventListener('ended', handleEnded)
       }
     }

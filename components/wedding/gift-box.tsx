@@ -85,7 +85,7 @@ export function GiftBox() {
             className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg rounded-full shadow-lg"
           >
             <Gift className="w-5 h-5 mr-2" />
-            Gửi Lời Chúc
+            Gửi Quà Mừng
             <Heart className="w-5 h-5 ml-2 fill-current" />
           </Button>
         </motion.div>
